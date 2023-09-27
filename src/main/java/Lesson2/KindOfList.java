@@ -16,10 +16,11 @@ public class KindOfList {
             }
         }
 
-        toDo(stringBuilder.toString());
+        KindOfList kindOfList = new KindOfList();
+        kindOfList.toDo(stringBuilder.toString());
     }
 
-    private static void toDo(String str) {
+    public void toDo(String str) {
         if (str.equals("")) {
             System.out.println("RANDOM");
         } else {
@@ -30,41 +31,36 @@ public class KindOfList {
             }
             System.out.println(defineKind(intArray));
         }
-
     }
 
-    private static String defineKind(int[] array) {
+    private String defineKind(int[] array) {
         String rsl = "";
-        if (array.length == 0) {
-            rsl = "RANDOM";
+        if (array.length == 1 || isAllEqual(array)) {
+            rsl = "CONSTANT";
         } else {
-            if (array.length == 1 || isAllEqual(array)) {
-                rsl = "CONSTANT";
-            } else {
-                int[] sortedArray = new int[array.length];
-                System.arraycopy(array, 0, sortedArray, 0, array.length);
-                Arrays.sort(sortedArray);
-                if (Arrays.equals(array, sortedArray)) {
-                    if (isExactlyUp(array)) {
-                        rsl = "ASCENDING";
-                    } else {
-                        rsl = "WEAKLY ASCENDING";
-                    }
-                } else if (isEqualReverse(array, sortedArray)){
-                    if (isExactlyDown(array)) {
-                        rsl = "DESCENDING";
-                    } else {
-                        rsl = "WEAKLY DESCENDING";
-                    }
+            int[] sortedArray = new int[array.length];
+            System.arraycopy(array, 0, sortedArray, 0, array.length);
+            Arrays.sort(sortedArray);
+            if (Arrays.equals(array, sortedArray)) {
+                if (isExactlyUp(array)) {
+                    rsl = "ASCENDING";
                 } else {
-                    rsl = "RANDOM";
+                    rsl = "WEAKLY ASCENDING";
                 }
+            } else if (isEqualReverse(array, sortedArray)){
+                if (isExactlyDown(array)) {
+                    rsl = "DESCENDING";
+                } else {
+                    rsl = "WEAKLY DESCENDING";
+                }
+            } else {
+                rsl = "RANDOM";
             }
         }
         return rsl;
     }
 
-    private static boolean isExactlyUp(int[] array) {
+    private boolean isExactlyUp(int[] array) {
         boolean rsl = true;
         for (int i = 0; i < array.length - 1; i++) {
             if (array[i + 1] <= array[i]) {
@@ -75,7 +71,7 @@ public class KindOfList {
         return rsl;
     }
 
-    private static boolean isExactlyDown(int[] array) {
+    private boolean isExactlyDown(int[] array) {
         boolean rsl = true;
         for (int i = 0; i < array.length - 1; i++) {
             if (array[i + 1] >= array[i]) {
@@ -86,7 +82,7 @@ public class KindOfList {
         return rsl;
     }
 
-    private static boolean isEqualReverse(int[] array1, int[] array2) {
+    private boolean isEqualReverse(int[] array1, int[] array2) {
         boolean rsl = false;
         if (array1.length == array2.length) {
             for (int i = 0; i < array1.length; i++) {
@@ -101,7 +97,7 @@ public class KindOfList {
         return rsl;
     }
 
-    private static boolean isAllEqual(int[] array) {
+    private boolean isAllEqual(int[] array) {
         boolean rsl = true;
         for (int i = 0; i < array.length - 1; i++) {
             if (array[i + 1] != array[i]) {
