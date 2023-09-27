@@ -6,9 +6,11 @@ import java.util.Arrays;
 
 public class KindOfList {
     public static void main(String[] args) throws Exception {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        KindOfList kindOfList = new KindOfList();
         String str = "";
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder stringBuilder = new StringBuilder();
+
         while (!str.equals("-2000000000")) {
             str = r.readLine();
             if (!str.equals("-2000000000")) {
@@ -16,7 +18,6 @@ public class KindOfList {
             }
         }
 
-        KindOfList kindOfList = new KindOfList();
         kindOfList.toDo(stringBuilder.toString());
     }
 
